@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from django.forms.models import modelformset_factory
+#from django.forms.models import modelformset_factory
+from django.forms.models import inlineformset_factory
 from app1.models import Musician, Album
 
 class MusicianForm(ModelForm):
@@ -12,4 +13,4 @@ class AlbumForm(ModelForm):
         model = Album
         fields = ['artist', 'name', 'release_date', 'num_stars']
 
-AlbumFormSet = inlineformset_factory(Sponsor, Album, form=AlbumForm, extra=2)
+AlbumFormSet = inlineformset_factory(Musician, Album, form=AlbumForm, extra=1, can_delete=False)

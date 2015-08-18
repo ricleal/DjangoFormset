@@ -6,7 +6,10 @@ from . import models
 from . import views
 
 urlpatterns = [
-    # url(r'^list/$', ListView.as_view(model=models.Musician),name='list'),
-    # url(r'^detail/(?P<pk>\d+)/$', DetailView.as_view(model=models.Musician),name='detail'),
-    # url(r'^create/$', views.MusicianCreate.as_view()),
+    url(r'^listmusician/$', ListView.as_view(model=models.Musician),name='listmusician'),
+    url(r'^detailmusician/(?P<pk>\d+)/$', DetailView.as_view(model=models.Musician),name='detailmusician'),
+    url(r'^createmusician/$', views.MusicianCreate.as_view()),
+
+    url(r'^createalbum/$', views.AlbumCreate.as_view()),
+    url(r'^detailalbum/(?P<pk>\d+)/$', DetailView.as_view(model=models.Album),name='detailalbum'),
 ]
