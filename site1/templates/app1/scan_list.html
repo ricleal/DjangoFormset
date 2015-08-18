@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Scans...</h2>
+    <ul>
+        {% for scan in object_list %}
+            <li>{{ scan }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
