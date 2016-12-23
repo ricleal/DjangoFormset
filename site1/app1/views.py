@@ -11,8 +11,6 @@ class MusicianCreate(CreateView):
     model = models.Musician
     fields = ['first_name', 'last_name']
 
-
-
 class FormsetMixin(object):
     object = None
 
