@@ -7,18 +7,24 @@ from django.forms.models import inlineformset_factory
 def manage_books(request, id_author=None):
 
     if id_author is None:
+        # New
         author = Author()
-        BookInlineFormSet = inlineformset_factory(Author, Book, form=BookForm, extra=2, can_delete=False)
+        BookInlineFormSet = inlineformset_factory(Author, Book, form=BookForm, extra=3, can_delete=False)
     else:
+        # Edit
         author = Author.objects.get(pk=id_author)
-        BookInlineFormSet = inlineformset_factory(Author, Book, form=BookForm, extra=2, can_delete=True)
+        BookInlineFormSet = inlineformset_factory(Author, Book, form=BookForm, extra=1, can_delete=True)
 
 
     if request.method == "POST":
-        form = AuthorForm(request.POST, request.FILES, instance=author, prefix="main")
-        formset = BookInlineFormSet(request.POST, request.FILES, instance=author, prefix="nested")
+        post_copy = request.POST.copy()
+        if 'add_form' in request.POST:
+            post_copy['nested-TOTAL_FORMS'] = int(post_copy['nested-TOTAL_FORMS'])+ 1
 
-        if form.is_valid() and formset.is_valid():
+        form = AuthorForm(post_copy, request.FILES, instance=author, prefix="main")
+        formset = BookInlineFormSet(post_copy, request.FILES, instance=author, prefix="nested")
+
+        if 'add_form' not in request.POST and form.is_valid() and formset.is_valid():
             form.save()
             formset.save()
             return redirect(reverse('app2:list'))

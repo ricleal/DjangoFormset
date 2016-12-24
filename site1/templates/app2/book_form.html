@@ -17,20 +17,21 @@
        <hr />
        <h3>Albuns Forms:</h3>
        <ul class="nav nav-tabs nav-justified">
-       {% for form in formset %}
+       {% for f in formset %}
           <li class="{{ forloop.first|yesno:'active,'}}"><a data-toggle="tab" href="#tab{{forloop.counter}}">Tab {{forloop.counter}}</a>
           </li>
        {% endfor %}
       </ul>
       <div class="tab-content">
-      {% for form in formset %}
+      {% for f in formset %}
           <div id="tab{{forloop.counter}}" class="tab-pane fade{{ forloop.first|yesno:' in active,'}}">
-          {% crispy form form.helper %}
+          {% crispy f f.helper %}
           </div>
        {% endfor %}
      </div>
      <hr />
      <button type="submit" class="btn btn-primary">Save</button>
+     {% if form.name.value|length > 0 %}<button type="submit" name="add_form" class="btn btn-default">Add form...</button>{% endif %}
 
    </form>
 
