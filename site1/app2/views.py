@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from .models import Author, Book
 from .forms import AuthorForm, BookForm
 
@@ -21,7 +21,7 @@ def manage_books(request, id_author=None):
         if form.is_valid() and formset.is_valid():
             form.save()
             formset.save()
-            return redirect('/app2/list')
+            return redirect(reverse('app2:list'))
     else:
         form = AuthorForm(instance=author, prefix="main")
         formset = BookInlineFormSet(instance=author, prefix="nested")

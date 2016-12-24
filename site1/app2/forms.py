@@ -9,6 +9,7 @@ class AuthorForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_tag = False
+        self.helper.form_class = 'form-horizontal'
         super(AuthorForm, self).__init__(*args, **kwargs)
     class Meta:
         model = Author
@@ -18,6 +19,7 @@ class BookForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_tag = False
+        self.helper.form_class = 'form-horizontal'
         super(BookForm, self).__init__(*args, **kwargs)
 
     class Meta:
