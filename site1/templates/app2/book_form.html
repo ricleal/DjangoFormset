@@ -8,8 +8,27 @@
     {% load crispy_forms_tags %}
     <form method="post" action="" class="form-horizontal">
 
+      <h3>Author Form:</h3>
        {% crispy form   %}
-       {% crispy formset formset.form.helper %}
+
+       {#% crispy formset formset.form.helper %#}
+
+       {#{ formset.management_form|crispy }#}
+
+       <h3>Albuns Forms:</h3>
+       <ul class="nav nav-tabs nav-justified">
+       {% for form in formset %}
+          <li class="{{ forloop.first|yesno:'active,'}}"><a data-toggle="tab" href="#tab{{forloop.counter}}">Tab {{forloop.counter}}</a>
+          </li>
+       {% endfor %}
+      </ul>
+      <div class="tab-content">
+      {% for form in formset %}
+          <div id="tab{{forloop.counter}}" class="tab-pane fade{{ forloop.first|yesno:' in active,'}}">
+          {% crispy form %}
+          </div>
+       {% endfor %}
+     </div>
 
       <button type="submit" class="btn btn-default">Save</button>
 
