@@ -3,8 +3,13 @@
 {% block content %}
     <h2>Musician...</h2>
     <ul>
-        {% for musician in object_list %}
-            <li>{{ musician }}</li>
+        {% for o in object_list %}
+        <li><strong>Author: </strong>{{ o }} :: <a href="">Edit..</a></li>
+        {% for b in o.albums.all %}
+        <p>
+          {{b}}
+        </p>
+        {% endfor %}
         {% endfor %}
     </ul>
 

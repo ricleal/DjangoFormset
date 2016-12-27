@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^app1/', include('app1.urls', namespace='app1')),
     url(r'^app2/', include('app2.urls', namespace='app2')),
+    url(r'^app3/', include('app3.urls', namespace='app3')),
     url(r'^$', RedirectView.as_view(pattern_name='app1:listmusician', permanent=False), name='index')
 ]

@@ -24,13 +24,17 @@ class Album(models.Model):
     )
     stars = dict(STARS)
 
-    artist = models.ForeignKey(Musician)
     name = models.CharField(max_length=100)
     release_date = models.DateField()
     num_stars = models.IntegerField(choices=STARS)
 
+    artist = models.ForeignKey(Musician,
+        on_delete=models.CASCADE,
+        related_name="albums",
+        related_query_name="album")
+
     def __str__(self):
-        return str(self.artist) + " - " + self.name + ' (' + self.stars[self.num_stars] + ')'
+        return self.name + ' by ' + str(self.artist) + ' (' + self.stars[self.num_stars] + ')'
 
     def get_absolute_url(self):
         '''

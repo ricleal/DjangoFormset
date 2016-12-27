@@ -3,17 +3,15 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h2>Create Album</h2>
+    <h2>APP2: Create Album</h2>
 
-    {% load crispy_forms_tags %}
     <form method="post" action="" class="form-horizontal">
 
       <h3>Author Form:</h3>
+       {{ formset.management_form }}
+
        {% crispy form   %}
 
-       {#% crispy formset formset.form.helper %#}
-
-       {{ formset.management_form|crispy }}
        <hr />
        <h3>Albuns Forms:</h3>
        <ul class="nav nav-tabs nav-justified">
@@ -31,7 +29,7 @@
      </div>
      <hr />
      <button type="submit" class="btn btn-primary">Save</button>
-     {% if form.name.value|length > 0 %}<button type="submit" name="add_form" class="btn btn-default">Add form...</button>{% endif %}
+     {% if form.first_name.value|length > 0 %}<button type="submit" name="add_form" class="btn btn-default">Add form...</button>{% endif %}
 
    </form>
 

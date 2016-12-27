@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Author list...</h2>
+    <ul>
+        {% for o in object_list %}
+            <li><strong>Author: </strong>{{ o }} :: <a href="{% url 'app3:update' o.id %}">Edit..</a></li>
+            {% for b in o.books.all %}
+            <p>
+              {{b}}
+            </p>
+          {% endfor %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}

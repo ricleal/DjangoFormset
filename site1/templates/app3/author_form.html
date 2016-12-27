@@ -3,35 +3,45 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h2>APP1: Create Album</h2>
+    <h2>Create Album</h2>
 
+    {% load crispy_forms_tags %}
     <form method="post" action="" class="form-horizontal">
 
-      {{ formset.management_form|crispy }}
-
-      <h3>Artist Form:</h3>
+      <h3>Author Form:</h3>
        {% crispy form   %}
 
-       <hr />
+       {#% crispy formset formset.form.helper %#}
 
-       <h3>Albums Forms:</h3>
+{% for formset in inlines %}
+
+       {{ formset.management_form|crispy }}
+       <hr />
+       <h3>Albuns Forms:</h3>
        <ul class="nav nav-tabs nav-justified">
+
        {% for f in formset %}
-          <li class="{{ forloop.first|yesno:'active,'}}"><a data-toggle="tab" href="#tab{{forloop.counter}}">Album {{forloop.counter}}</a>
+          <li class="{{ forloop.first|yesno:'active,'}}"><a data-toggle="tab" href="#tab{{forloop.counter}}">Tab {{forloop.counter}}</a>
           </li>
        {% endfor %}
       </ul>
       <div class="tab-content">
+
       {% for f in formset %}
           <div id="tab{{forloop.counter}}" class="tab-pane fade{{ forloop.first|yesno:' in active,'}}">
-          {% crispy f %}
+          {% crispy f f.helper %}
           </div>
        {% endfor %}
+
+{% endfor %}
+
      </div>
      <hr />
      <button type="submit" class="btn btn-primary">Save</button>
-     {% if form.first_name.value|length > 0 %}<button type="submit" name="add_form" class="btn btn-default">Add form...</button>{% endif %}
+     {% if form.name.value|length > 0 %}<button type="submit" name="add_form" class="btn btn-default">Add form...</button>{% endif %}
 
    </form>
+
+   {# <pre>{% debug %}</pre>#}
 
 {% endblock %}

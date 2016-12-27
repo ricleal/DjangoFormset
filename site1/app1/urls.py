@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^detailalbum/(?P<pk>\d+)/$', DetailView.as_view(model=models.Album),name='detailalbum'),
     # Formmsets with Class based views
     url(r'^createalbum/$', views.AlbumCreate.as_view()),
+    url(r'^editalbum/(?P<pk>\d+)$', views.AlbumEdit.as_view()),
     # regular formsets
 
 ]
