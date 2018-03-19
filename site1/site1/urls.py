@@ -1,27 +1,14 @@
-"""site1 URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
-from django.conf.urls import include, url
+from django.urls import include, path, re_path
 from django.contrib import admin
 
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^app1/', include('app1.urls', namespace='app1')),
-    url(r'^app2/', include('app2.urls', namespace='app2')),
-    url(r'^app3/', include('app3.urls', namespace='app3')),
-    url(r'^$', RedirectView.as_view(pattern_name='app1:listmusician', permanent=False), name='index')
+    path('admin/', admin.site.urls),
+    re_path(r'^app1/', include(('app1.urls', 'app1'), namespace='app1')),
+    re_path(r'^app2/', include(('app2.urls', 'app2'), namespace='app2')),
+    re_path(r'^app3/', include(('app3.urls', 'app3'), namespace='app3')),
+    re_path(r'^$', RedirectView.as_view(pattern_name='app1:listmusician',
+                                        permanent=False),
+            name='index')
 ]

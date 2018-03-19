@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from .models import Author, Book
 from .forms import AuthorForm, BookForm, BookInlineFormSetCreate, BookInlineFormSetEdit
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from django.views.generic.edit import CreateView, UpdateView
 
